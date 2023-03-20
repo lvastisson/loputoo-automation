@@ -1,0 +1,7 @@
+---
+- hosts: example
+  remote_user: lauri
+  become: yes
+  tasks:
+    - name: Enable root login
+      shell: cp /home/lauri/.ssh/authorized_keys /root/.ssh/
