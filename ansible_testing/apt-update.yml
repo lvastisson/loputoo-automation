@@ -1,0 +1,16 @@
+---
+- hosts: example
+  remote_user: root
+  become: yes
+
+  tasks:
+  - name: update apt packages
+    apt:
+      upgrade: yes
+      update_cache: yes
+      autoremove: yes
+
+  - name: update aptitude
+    apt:
+      name: aptitude
+      state: latest
