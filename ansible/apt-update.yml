@@ -9,8 +9,3 @@
       upgrade: yes
       update_cache: yes
       autoremove: yes
-
-  - name: update aptitude
-    apt:
-      name: aptitude
-      state: latest

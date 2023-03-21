@@ -2,6 +2,9 @@
 - hosts: example
   remote_user: lauri
   become: yes
+
   tasks:
+    # voimaldab ssh root kasutajana, et ei peaks iga playbooki puhul
+    # eraldi kasitsi sisestama sudo parooli
     - name: Enable root login
       shell: cp /home/lauri/.ssh/authorized_keys /root/.ssh/
