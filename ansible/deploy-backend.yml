@@ -1,5 +1,6 @@
 ---
-- hosts: example
+- name: Deploy the backend service
+  hosts: example
   remote_user: root
   become: yes
   vars:
@@ -10,9 +11,6 @@
     IMAGE_NAME: chatapp_backend
     CONTAINER_NAME: chatapp_backend
     DOCKERFILE_PATH: /home/{{ USER }}/{{ LOCAL_FOLDER_NAME }}/backend/
-    # DOCKER_PORTS:
-    #   - "5000:5000"
-    #   - "5001:5001"
 
   tasks:
     # tasub teada: repo kloonimisel kasutatakse ansible masina ssh key'd, mitte target masina key'd
@@ -34,8 +32,6 @@
       docker_container:
         name: "{{ CONTAINER_NAME }}"
         image: "{{ IMAGE_NAME }}"
-        # pole vaja kui kasutusel network_mode: host
-        # ports: "{{ DOCKER_PORTS }}"
         # liidab konteineri vorgu hosti vorguga
         network_mode: host
         state: started

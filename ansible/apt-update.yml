@@ -1,5 +1,6 @@
 ---
-- hosts: example
+- name: Update apt packages
+  hosts: example
   remote_user: root
   become: yes
 

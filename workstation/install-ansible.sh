@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# sudo -n true
-# test $? -eq 0 || exit 1 "sudo privilege is required to run this script"
-
 txtblu='\033[0;34m'
 txtcyn='\033[0;36m'
 txtgrn='\033[0;32m'

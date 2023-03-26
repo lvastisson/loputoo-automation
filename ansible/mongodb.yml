@@ -1,5 +1,6 @@
 ---
-- hosts: example
+- name: Setup MongoDB
+  hosts: example
   remote_user: root
   become: yes
 

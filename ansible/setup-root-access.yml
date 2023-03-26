@@ -1,0 +1,14 @@
+---
+- name: Setup root SSH
+  hosts: example
+  remote_user: lauri
+  become: yes
+
+  tasks:
+    # jooksutada '-kK' flagidega: ansible-playbook enable-root-access.yaml -kK
+    # seadistab ssh root kasutajana, et ei peaks iga playbooki puhul
+    # eraldi kasitsi sisestama sudo parooli
+    - name: Copy SSH key to root account
+      authorized_key:
+        user: root
+        key: "{{ lookup('file', '/home/' + lookup('env', 'USER') + '/.ssh/id_rsa.pub') }}"
