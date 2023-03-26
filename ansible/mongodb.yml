@@ -29,7 +29,7 @@
       state: present
       update_cache: yes
 
-  - name: Ensure mongodb is running and and enabled to start automatically on reboots
+  - name: Ensure mongodb is running and enabled to start automatically on reboots
     service:
       name: mongod
       state: started

@@ -27,6 +27,8 @@
           path: "{{ DOCKERFILE_PATH }}"
         name: "{{ IMAGE_NAME }}"
         source: build
+        force_source: true
+        state: present
 
     - name: Run Docker container
       docker_container:
@@ -34,4 +36,9 @@
         image: "{{ IMAGE_NAME }}"
         # liidab konteineri vorgu hosti vorguga
         network_mode: host
+        # recreate: true
         state: started
+
+    - name: Delete old Docker images
+      docker_prune:
+        images: true
