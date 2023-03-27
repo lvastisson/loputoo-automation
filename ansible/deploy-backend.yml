@@ -38,6 +38,7 @@
         network_mode: host
         # recreate: true
         state: started
+        restart_policy: unless-stopped
 
     - name: Delete old Docker images
       docker_prune:
