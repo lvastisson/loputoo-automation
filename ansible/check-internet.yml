@@ -6,9 +6,9 @@
 
   tasks:
   - name: Check internet access
-    ansible.netcommon.net_ping:
-      dest: 8.8.8.8
+    shell: ping -c 1 -w 2 8.8.8.8
+    ignore_errors: true
 
   - name: Check DNS
-    ansible.netcommon.net_ping:
-      dest: www.google.com
+    shell: ping -c 1 -w 2 www.google.com
+    ignore_errors: true
