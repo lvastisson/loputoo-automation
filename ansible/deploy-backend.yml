@@ -40,6 +40,16 @@
         state: started
         restart_policy: unless-stopped
 
+    - name: Check that the nodejs server returns status 200
+      ansible.builtin.uri:
+        url: http://localhost:8080/status
+        follow_redirects: none
+        method: GET
+      register: _result
+      until: _result.status == 200
+      retries: 5 # 5 * 3 seconds = max 15 seconds
+      delay: 3 # Every 3 seconds
+
     - name: Delete old Docker images
       docker_prune:
         images: true
