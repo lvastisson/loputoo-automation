@@ -7,8 +7,8 @@
   tasks:
   - name: Check internet access
     shell: ping -c 1 -w 2 8.8.8.8
-    ignore_errors: true
+    changed_when: false
 
   - name: Check DNS
     shell: ping -c 1 -w 2 www.google.com
-    ignore_errors: true
+    changed_when: false
