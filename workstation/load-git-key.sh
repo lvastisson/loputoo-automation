@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# NB! skript tuleb source'da, mitte jooksutada skriptina. Ehk ette tuleb panna '.'
+# Näide '. ./load-git-key.sh'
+
 # start ssh agent
 eval `ssh-agent -s`
 
