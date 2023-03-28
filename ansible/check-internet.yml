@@ -1,0 +1,14 @@
+---
+- name: Setup Nginx
+  hosts: example
+  remote_user: root
+  become: yes
+
+  tasks:
+  - name: Check internet access
+    ansible.netcommon.net_ping:
+      dest: 8.8.8.8
+
+  - name: Check DNS
+    ansible.netcommon.net_ping:
+      dest: www.google.com
