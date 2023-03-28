@@ -18,12 +18,12 @@ add-apt-repository ppa:ansible/ansible -y >> /dev/null
 
 echo -e "${txtcyn}[2]${txtgrn} updating package cache${txtrst}"
 echo -e "${txtcyn}[2.1]${txtblu} apt update${txtrst}"
-apt-get update -y >> /dev/null
+apt-get update -y
 echo -e "${txtcyn}[2.2]${txtblu} apt upgrade${txtrst}"
-apt-get upgrade -y >> /dev/null
+apt-get upgrade -y
 
 echo -e "${txtcyn}[3]${txtgrn} installing python 3.10${txtrst}"
-apt-et install python3.10 -y >> /dev/null
+apt-get install python3.10 -y >> /dev/null
 
 echo -e "${txtblu}installed python version:${txtrst}"
 python3 --version
