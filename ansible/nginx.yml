@@ -1,6 +1,6 @@
 ---
 - name: Setup Nginx
-  hosts: example
+  hosts: app
   remote_user: root
   become: yes
 

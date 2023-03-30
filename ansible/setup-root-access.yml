@@ -1,6 +1,6 @@
 ---
 - name: Setup root SSH
-  hosts: example
+  hosts: main
   remote_user: lauri
   become: yes
 

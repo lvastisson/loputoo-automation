@@ -1,6 +1,6 @@
 ---
-- name: Shutdown servers
-  hosts: example
+- name: Shutdown all servers
+  hosts: all
   remote_user: root
   become: yes
 

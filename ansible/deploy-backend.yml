@@ -1,6 +1,6 @@
 ---
 - name: Deploy the backend service
-  hosts: example
+  hosts: app
   remote_user: root
   become: yes
   vars:
