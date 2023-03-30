@@ -1,0 +1,3 @@
+---
+- import_playbook: lamp-stack.yml
+- import_playbook: zabbix-server.yml

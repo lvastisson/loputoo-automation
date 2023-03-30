@@ -1,0 +1,5 @@
+---
+workspace_folder: '/var/workspace'
+mysql_root_password: "password"
+mysql_zabbix_password: "password"
+http_port: "8080"

@@ -24,7 +24,7 @@
 
     - name: Copy new Nginx config
       template:
-        src: configs/nginx.conf
+        src: configs/app/nginx.conf
         dest: /etc/nginx/sites-available/chatapp
       notify: Restart Nginx
 
