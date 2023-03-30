@@ -5,5 +5,5 @@
   become: yes
 
   tasks:
-  - name: Shutdown server
-    community.general.shutdown:
+    - name: Shutdown server
+      community.general.shutdown:

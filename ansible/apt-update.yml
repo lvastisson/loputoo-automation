@@ -5,8 +5,8 @@
   become: yes
 
   tasks:
-  - name: update apt packages
-    apt:
-      upgrade: yes
-      update_cache: yes
-      autoremove: yes
+    - name: update apt packages
+      apt:
+        upgrade: yes
+        update_cache: yes
+        autoremove: yes
