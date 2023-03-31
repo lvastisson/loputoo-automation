@@ -4,7 +4,7 @@
   remote_user: root
   become: yes
   vars_files:
-    - vars/monitoring.yml
+    - vars/main.yml
 
   tasks:
     - name: Create workspace folder
@@ -81,15 +81,15 @@
         group: root
         mode: 0644
       loop:
-        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/nginx.conf"
+        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/nginx.conf.j2"
           dest: "/etc/zabbix/nginx.conf"
-        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/php-fpm.conf"
+        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/php-fpm.conf.j2"
           dest: "/etc/zabbix/php-fpm.conf"
-        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/zabbix_agentd.conf"
+        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/zabbix_agentd.conf.j2"
           dest: "/etc/zabbix/zabbix_agentd.conf"
-        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/zabbix_server.conf"
+        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/zabbix_server.conf.j2"
           dest: "/etc/zabbix/zabbix_server.conf"
-        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/web/zabbix.conf.php"
+        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/web/zabbix.conf.php.j2"
           dest: "/etc/zabbix/web/zabbix.conf.php"
 
     - name: Restart and enable Zabbix server and agent processes
@@ -104,10 +104,10 @@
         - nginx
         - php8.1-fpm
 
-    - name: "UFW - Allow HTTP on port {{ http_port }}"
+    - name: "UFW - Allow HTTP on port {{ zabbix_port }}"
       ufw:
         rule: allow
-        port: "{{ http_port }}"
+        port: "{{ zabbix_port }}"
         proto: tcp
 
 # TODO: Check Zabbix frontend is accessible

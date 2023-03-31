@@ -3,6 +3,8 @@
   hosts: app
   remote_user: root
   become: yes
+  vars_files:
+    - vars/main.yml
 
   handlers:
     - name: Restart Nginx
@@ -24,7 +26,7 @@
 
     - name: Copy new Nginx config
       template:
-        src: configs/app/nginx.conf
+        src: configs/app/nginx.conf.j2
         dest: /etc/nginx/sites-available/chatapp
       notify: Restart Nginx
 

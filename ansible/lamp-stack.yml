@@ -4,7 +4,7 @@
   remote_user: root
   become: yes
   vars_files:
-    - vars/monitoring.yml
+    - vars/main.yml
 
   tasks:
     - name: Install aptitude
