@@ -4,12 +4,12 @@
   "params": [
     {
       "description": "{{ zabbix_host_name }} not responding",
-      "expression": "last(/chatapp/web.test.fail[{{ zabbix_host_name }}])>0",
+      "expression": "last(/{{ zabbix_host_name }}/web.test.fail[{{ zabbix_host_name }}])>0",
       "priority": "4"
     },
     {
       "description": "{{ zabbix_host_name }} response not 200",
-      "expression": "last(/chatapp/web.test.rspcode[{{ zabbix_host_name }},http status])<>200",
+      "expression": "last(/{{ zabbix_host_name }}/web.test.rspcode[{{ zabbix_host_name }},http status])<>200",
       "priority": "4"
     }
   ],

@@ -1,4 +1,5 @@
 ---
+ZABBIX_URL: http://192.168.8.204:8080/api_jsonrpc.php
 ZABBIX_USERNAME: Admin
 ZABBIX_PASSWORD: zabbix
 zabbix_host_name: app

@@ -4,7 +4,7 @@
     url: "{{ ZABBIX_URL }}"
     return_content: yes
     method: POST
-    body: "{{ lookup('template','templates/login.j2') }}"
+    body: "{{ lookup('template','{{ role_path}}/templates/login.j2') }}"
     body_format: json
     headers:
       Content-Type: "application/json-rpc"
@@ -17,20 +17,20 @@
   uri:
     url: "{{ ZABBIX_URL }}"
     return_content: yes
-    body: "{{ lookup('template','templates/get_group.j2') }}"
+    body: "{{ lookup('template','{{ role_path}}/templates/get-group-id.j2') }}"
     body_format: json
     headers:
       Content-Type: "application/json-rpc"
   register: host_group_query
 
 - name: Get group id from previous query
-  set_fact: "host_group_id={{ host_group_query.json.result.0.groupid }}"
+  set_fact: "host_group_id={{ host_group_query.json.result.0.groupid | default('0') }}"
 
 - name: Create host
   uri:
     url: "{{ ZABBIX_URL }}"
     return_content: yes
-    body: "{{ lookup('template','templates/create_host.j2') }}"
+    body: "{{ lookup('template','{{ role_path}}/templates/create-host.j2') }}"
     body_format: json
     headers:
       Content-Type: "application/json-rpc"
@@ -38,13 +38,13 @@
   changed_when: create_host_query.json.error is undefined
 
 - name: Get host id from previous response
-  set_fact: "host_id={{ create_host_query.json.result.hostids.0 }}"
+  set_fact: "host_id={{ create_host_query.json.result.hostids.0 | default('0')}}"
 
 - name: Add web scenario
   uri:
     url: "{{ ZABBIX_URL }}"
     return_content: yes
-    body: "{{ lookup('template','templates/create-web-scenario.j2') }}"
+    body: "{{ lookup('template','{{ role_path}}/templates/create-web-scenario.j2') }}"
     body_format: json
     headers:
       Content-Type: "application/json-rpc"
@@ -55,7 +55,7 @@
   uri:
     url: "{{ ZABBIX_URL }}"
     return_content: yes
-    body: "{{ lookup('template','templates/create-trigger.j2') }}"
+    body: "{{ lookup('template','{{ role_path}}/templates/create-trigger.j2') }}"
     body_format: json
     headers:
       Content-Type: "application/json-rpc"
@@ -66,7 +66,7 @@
   uri:
     url: "{{ ZABBIX_URL }}"
     return_content: yes
-    body: "{{ lookup('template','templates/logout.j2') }}"
+    body: "{{ lookup('template','{{ role_path}}/templates/logout.j2') }}"
     body_format: json
     headers:
       Content-Type: "application/json-rpc"
