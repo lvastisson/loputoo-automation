@@ -1,0 +1,72 @@
+---
+- name: Request Zabbix auth token
+  uri:
+    url: "{{ ZABBIX_URL }}"
+    return_content: yes
+    method: POST
+    body: "{{ lookup('template','templates/login.j2') }}"
+    body_format: json
+    headers:
+      Content-Type: "application/json-rpc"
+  register: auth_query
+
+- name: Get Zabbix auth token from previous response
+  set_fact: "zabbix_auth_token={{ auth_query.json.result }}"
+
+- name: Get group
+  uri:
+    url: "{{ ZABBIX_URL }}"
+    return_content: yes
+    body: "{{ lookup('template','templates/get_group.j2') }}"
+    body_format: json
+    headers:
+      Content-Type: "application/json-rpc"
+  register: host_group_query
+
+- name: Get group id from previous query
+  set_fact: "host_group_id={{ host_group_query.json.result.0.groupid }}"
+
+- name: Create host
+  uri:
+    url: "{{ ZABBIX_URL }}"
+    return_content: yes
+    body: "{{ lookup('template','templates/create_host.j2') }}"
+    body_format: json
+    headers:
+      Content-Type: "application/json-rpc"
+  register: create_host_query
+  changed_when: create_host_query.json.error is undefined
+
+- name: Get host id from previous response
+  set_fact: "host_id={{ create_host_query.json.result.hostids.0 }}"
+
+- name: Add web scenario
+  uri:
+    url: "{{ ZABBIX_URL }}"
+    return_content: yes
+    body: "{{ lookup('template','templates/create-web-scenario.j2') }}"
+    body_format: json
+    headers:
+      Content-Type: "application/json-rpc"
+  register: add_scenario_query
+  changed_when: add_scenario_query.json.error is undefined
+
+- name: Add trigger
+  uri:
+    url: "{{ ZABBIX_URL }}"
+    return_content: yes
+    body: "{{ lookup('template','templates/create-trigger.j2') }}"
+    body_format: json
+    headers:
+      Content-Type: "application/json-rpc"
+  register: add_trigger_query
+  changed_when: add_trigger_query.json.error is undefined
+
+- name: Logout
+  uri:
+    url: "{{ ZABBIX_URL }}"
+    return_content: yes
+    body: "{{ lookup('template','templates/logout.j2') }}"
+    body_format: json
+    headers:
+      Content-Type: "application/json-rpc"

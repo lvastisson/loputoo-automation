@@ -1,0 +1,4 @@
+---
+ZABBIX_USERNAME: Admin
+ZABBIX_PASSWORD: zabbix
+zabbix_host_name: app

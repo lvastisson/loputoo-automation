@@ -2,13 +2,13 @@
   "jsonrpc": "2.0",
   "method": "host.create",
   "params": {
-    "host": "chatapp",
+    "host": "{{ zabbix_host_name }}",
     "groups": [
       {
-        "groupid": "12"
+        "groupid": "{{ host_group_id }}"
       }
     ]
   },
-  "auth": "{{ zabbix_token }}",
+  "auth": "{{ zabbix_auth_token }}",
   "id": 1
 }

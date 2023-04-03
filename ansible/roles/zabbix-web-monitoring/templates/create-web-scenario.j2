@@ -2,7 +2,7 @@
   "jsonrpc": "2.0",
   "method": "httptest.create",
   "params": {
-    "name": "chatapp backend",
+    "name": "{{ zabbix_host_name }}",
     "hostid": "10562",
     "delay": "20",
     "steps": [
@@ -14,6 +14,6 @@
       }
     ]
   },
-  "auth": "{{ zabbix_token }}",
+  "auth": "{{ zabbix_auth_token }}",
   "id": 1
 }
