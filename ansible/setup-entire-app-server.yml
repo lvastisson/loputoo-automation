@@ -1,7 +1,11 @@
 ---
-- import_playbook: check-internet.yml
-- import_playbook: apt-update.yml
-- import_playbook: mongodb.yml
-- import_playbook: docker.yml
-- import_playbook: nginx.yml
-- import_playbook: deploy-backend.yml
+- hosts: app
+  remote_user: root
+  become: yes
+  roles:
+    - check-internet
+    - apt-update
+    - mongodb
+    - docker
+    - nginx
+    - deploy-backend

@@ -1,0 +1,3 @@
+---
+WORKSPACE_FOLDER: "/var/workspace"
+MYSQL_ROOT_PASSWORD: "password"

@@ -1,3 +1,7 @@
 ---
-- import_playbook: lamp-stack.yml
-- import_playbook: zabbix-server.yml
+- hosts: monitoring
+  remote_user: root
+  become: yes
+  roles:
+    - lamp-stack
+    - zabbix-server
