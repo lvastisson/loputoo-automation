@@ -4,4 +4,7 @@ mysql_root_password: "password"
 mysql_zabbix_password: "password"
 zabbix_port: "8080"
 
+zabbix_username: "Admin"
+zabbix_password: "zabbix"
+
 app_nginx_port: "8080"
