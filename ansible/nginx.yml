@@ -26,7 +26,7 @@
 
     - name: Copy new Nginx config
       template:
-        src: configs/app/nginx.conf.j2
+        src: templates/app/nginx.conf.j2
         dest: /etc/nginx/sites-available/chatapp
       notify: Restart Nginx
 
@@ -36,9 +36,9 @@
         dest: /etc/nginx/sites-enabled/chatapp
         state: link
       notify: Restart Nginx
-    
+
     - name: Allow port 8080
       ufw:
         rule: allow
-        port: '8080'
+        port: "8080"
         proto: tcp

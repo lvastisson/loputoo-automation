@@ -14,12 +14,12 @@
         mode: "0755"
 
     - name: Install Prerequisites
-      apt: 
+      apt:
         name: "{{ item }}"
         update_cache: yes
         state: latest
         force_apt_get: yes
-      loop: [ 'aptitude', 'python3-pymysql' ]
+      loop: ["aptitude", "python3-pymysql"]
 
     - name: Download Zabbix repository file
       ansible.builtin.get_url:
@@ -39,7 +39,14 @@
         name: "{{ item }}"
         update_cache: yes
         state: latest
-      loop: [ 'zabbix-server-mysql', 'zabbix-frontend-php', 'zabbix-nginx-conf', 'zabbix-sql-scripts', 'zabbix-agent' ]
+      loop:
+        [
+          "zabbix-server-mysql",
+          "zabbix-frontend-php",
+          "zabbix-nginx-conf",
+          "zabbix-sql-scripts",
+          "zabbix-agent",
+        ]
 
     - name: Create Zabbix database
       mysql_db:
@@ -54,17 +61,17 @@
       community.mysql.mysql_user:
         name: zabbix
         password: "{{ mysql_zabbix_password }}"
-        priv: 'zabbix.*:ALL'
+        priv: "zabbix.*:ALL"
         state: present
         login_user: root
         login_password: "{{ mysql_root_password }}"
 
     - name: Copy Zabbix db dump file
       copy:
-        src: "{{ playbook_dir }}/configs/monitoring/zabbix/zabbixdb_dump.sql"
+        src: "{{ playbook_dir }}/templates/monitoring/zabbix/zabbixdb_dump.sql"
         dest: /tmp/dump.sql
 
-# might need to add "set global log_bin_trust_function_creators = 1;" in case of errors
+    # might need to add "set global log_bin_trust_function_creators = 1;" in case of errors
     - name: Import Zabbix db
       mysql_db:
         name: zabbix
@@ -81,15 +88,15 @@
         group: root
         mode: 0644
       loop:
-        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/nginx.conf.j2"
+        - src: "{{ playbook_dir }}/templates/monitoring/zabbix/nginx.conf.j2"
           dest: "/etc/zabbix/nginx.conf"
-        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/php-fpm.conf.j2"
+        - src: "{{ playbook_dir }}/templates/monitoring/zabbix/php-fpm.conf.j2"
           dest: "/etc/zabbix/php-fpm.conf"
-        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/zabbix_agentd.conf.j2"
+        - src: "{{ playbook_dir }}/templates/monitoring/zabbix/zabbix_agentd.conf.j2"
           dest: "/etc/zabbix/zabbix_agentd.conf"
-        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/zabbix_server.conf.j2"
+        - src: "{{ playbook_dir }}/templates/monitoring/zabbix/zabbix_server.conf.j2"
           dest: "/etc/zabbix/zabbix_server.conf"
-        - src: "{{ playbook_dir }}/configs/monitoring/zabbix/web/zabbix.conf.php.j2"
+        - src: "{{ playbook_dir }}/templates/monitoring/zabbix/web/zabbix.conf.php.j2"
           dest: "/etc/zabbix/web/zabbix.conf.php"
 
     - name: Restart and enable Zabbix server and agent processes
@@ -109,5 +116,4 @@
         rule: allow
         port: "{{ zabbix_port }}"
         proto: tcp
-
 # TODO: Check Zabbix frontend is accessible
