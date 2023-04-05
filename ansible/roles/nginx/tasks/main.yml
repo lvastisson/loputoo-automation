@@ -26,5 +26,5 @@
 - name: Allow port 8080
   ufw:
     rule: allow
-    port: "8080"
+    port: "{{ NGINX_PORT }}"
     proto: tcp
