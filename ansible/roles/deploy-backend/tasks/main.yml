@@ -28,7 +28,7 @@
 
 - name: Check that the nodejs server returns status 200
   ansible.builtin.uri:
-    url: http://localhost:8080/status
+    url: http://{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}:{{ NGINX_PORT }}/status
     follow_redirects: none
     method: GET
   register: _result
