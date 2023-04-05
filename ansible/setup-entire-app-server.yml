@@ -3,6 +3,7 @@
   remote_user: root
   become: yes
   roles:
+    - initial-setup
     - check-internet
     - apt-update
     - mongodb

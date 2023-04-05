@@ -1,0 +1,7 @@
+---
+- name: Allow ssh port & enable UFW
+  ufw:
+    rule: allow
+    port: 22
+    proto: tcp
+    state: enabled
