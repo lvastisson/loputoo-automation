@@ -4,6 +4,6 @@
   become: yes
   roles:
     - initial-setup
-    - lamp-stack
+    - lemp-stack
     - zabbix-server
     - zabbix-web-monitoring
