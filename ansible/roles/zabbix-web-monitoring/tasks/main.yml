@@ -1,4 +1,16 @@
 ---
+- name: Gathering facts from app servers
+  setup:
+  delegate_to: "{{ item }}"
+  delegate_facts: true
+  when: hostvars[item]['ansible_env'] is not defined
+  with_items: "{{ groups['app'] }}"
+
+- name: Set variables
+  set_fact:
+    ZABBIX_URL: "{{ ZABBIX_SERVER_URL | default('http://' + hostvars[inventory_hostname]['ansible_env'].SSH_CONNECTION.split(' ')[2] + ':8080/api_jsonrpc.php') }}"
+    ZABBIX_HOST_URL: "{{ APP_URL | default('http://' + hostvars['chatapp']['ansible_env'].SSH_CONNECTION.split(' ')[2] + ':8080/status') }}"
+
 - name: Request Zabbix auth token
   uri:
     url: "{{ ZABBIX_URL }}"

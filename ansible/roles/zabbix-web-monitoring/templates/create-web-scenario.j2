@@ -2,13 +2,13 @@
   "jsonrpc": "2.0",
   "method": "httptest.create",
   "params": {
-    "name": "{{ zabbix_host_name }}",
+    "name": "{{ ZABBIX_HOST_NAME }}",
     "hostid": "{{ host_id }}",
     "delay": "20",
     "steps": [
       {
         "name": "http status",
-        "url": "http://192.168.8.202:8080/status",
+        "url": "{{ ZABBIX_HOST_URL }}",
         "status_codes": "200",
         "no": "1"
       }

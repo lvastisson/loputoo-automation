@@ -3,13 +3,13 @@
   "method": "trigger.create",
   "params": [
     {
-      "description": "{{ zabbix_host_name }} not responding",
-      "expression": "last(/{{ zabbix_host_name }}/web.test.fail[{{ zabbix_host_name }}])>0",
+      "description": "{{ ZABBIX_HOST_NAME }} not responding",
+      "expression": "last(/{{ ZABBIX_HOST_NAME }}/web.test.fail[{{ ZABBIX_HOST_NAME }}])>0",
       "priority": "4"
     },
     {
-      "description": "{{ zabbix_host_name }} response not 200",
-      "expression": "last(/{{ zabbix_host_name }}/web.test.rspcode[{{ zabbix_host_name }},http status])<>200",
+      "description": "{{ ZABBIX_HOST_NAME }} response not 200",
+      "expression": "last(/{{ ZABBIX_HOST_NAME }}/web.test.rspcode[{{ ZABBIX_HOST_NAME }},http status])<>200",
       "priority": "4"
     }
   ],
