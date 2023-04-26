@@ -1,10 +1,4 @@
 ---
-- name: Install aptitude
-  apt:
-    name: aptitude
-    state: latest
-    update_cache: yes
-
 - name: Import public key
   apt_key:
     url: "https://www.mongodb.org/static/pgp/server-6.0.asc"

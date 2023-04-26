@@ -1,11 +1,4 @@
 ---
-- name: Install aptitude
-  apt:
-    name: aptitude
-    update_cache: yes
-    state: latest
-    force_apt_get: yes
-
 - name: Install LEMP Packages
   apt:
     name: "{{ item }}"
