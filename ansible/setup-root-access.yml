@@ -6,7 +6,7 @@
 
   tasks:
     # jooksutada '-kK' flagidega: ansible-playbook enable-root-access.yaml -kK
-    # seadistab ssh root kasutajana, et ei peaks iga playbooki puhul
+    # seadistab ssh root kasutajana, et ei peaks igal playbooki jooksutamisel
     # eraldi kasitsi sisestama sudo parooli
     - name: Copy SSH key to root account
       authorized_key:
