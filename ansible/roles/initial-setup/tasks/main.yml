@@ -7,6 +7,12 @@
     state: latest
   loop: ["aptitude"]
 
+- name: Update apt packages
+  apt:
+    upgrade: yes
+    update_cache: yes
+    autoremove: yes
+
 - name: Allow ssh port & enable UFW
   community.general.ufw:
     rule: allow
