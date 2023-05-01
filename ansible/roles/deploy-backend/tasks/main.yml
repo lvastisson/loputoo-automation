@@ -8,7 +8,7 @@
     accept_hostkey: yes
 
 - name: Build Docker image
-  docker_image:
+  community.docker.docker_image:
     build:
       path: "{{ DOCKERFILE_PATH }}"
     name: "{{ IMAGE_NAME }}"
@@ -17,7 +17,7 @@
     state: present
 
 - name: Run Docker container
-  docker_container:
+  community.docker.docker_container:
     name: "{{ CONTAINER_NAME }}"
     image: "{{ IMAGE_NAME }}"
     # liidab konteineri vorgu hosti vorguga
@@ -27,7 +27,7 @@
     restart_policy: unless-stopped
 
 - name: Check that the nodejs server returns status 200
-  ansible.builtin.uri:
+  uri:
     url: http://{{ hostvars[inventory_hostname]['ansible_env'].SSH_CONNECTION.split(' ')[2] }}:{{ NGINX_PORT }}/status
     follow_redirects: none
     method: GET
@@ -37,5 +37,5 @@
   delay: 3 # Every 3 seconds
 
 - name: Delete old Docker images
-  docker_prune:
+  community.docker.docker_prune:
     images: true

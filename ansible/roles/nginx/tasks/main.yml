@@ -27,7 +27,7 @@
     state: restarted
 
 - name: Allow port 8080
-  ufw:
+  community.general.ufw:
     rule: allow
     port: "{{ NGINX_PORT }}"
     proto: tcp

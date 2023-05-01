@@ -8,7 +8,7 @@
   loop: ["aptitude"]
 
 - name: Allow ssh port & enable UFW
-  ufw:
+  community.general.ufw:
     rule: allow
     port: 22
     proto: tcp
