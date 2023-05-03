@@ -105,4 +105,3 @@
     rule: allow
     port: "{{ ZABBIX_PORT }}"
     proto: tcp
-# TODO: Check Zabbix frontend is accessible
